@@ -5,6 +5,7 @@ def ds_condition_check(settings,diagsat, as3935,mac_id,db):
         print(f"Check if count holds true for given time for a given master Return 0 or 1")
         ##put this query in a diffrent class so that if required we can call the same querry again and again
         result=db.count_as_trigger(mac_id,settings.AS_trigger)
+        print('result',result)
         count_as_db= result[0]['count']
         if as3935 ==1 :
             count_as_db =+1

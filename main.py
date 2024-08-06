@@ -8,7 +8,7 @@ from weather_condition_check import weather_condition_check
 from lmas_data_table import MySQLDatabase
 
 
-#Settings Class
+#Settings Class ( change to database for production)
 class Settings:
     def __init__(self):
         self.check_previous_AS = False  #check if previous AS has triggerd for DS
@@ -36,7 +36,7 @@ db=MySQLDatabase(host='localhost',user="Mepl",password="Mepl@123",database="mana
 #API Call /weatherapi
 mac_id = "1234"
 daigsat = '1'
-as3935 = '1'
+as3935 = '0'
 battery = '1234'
 
 diagsat = int(daigsat)
