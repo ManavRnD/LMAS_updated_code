@@ -54,3 +54,12 @@ class MySQLDatabase:
         """
         params=(macid,interval)
         return self.execute_query(query,params)
+
+    def get_api_key(self,macid):
+        #query to get the api_key,latitude & longitude for openweather call
+        query="""
+            SELECT api_key,latitude,longitude FROM lmas_admin
+            WHERE macid=%s
+        """
+        params=(macid,)
+        return self.execute_query(query,params)

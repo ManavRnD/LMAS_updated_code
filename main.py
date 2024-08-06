@@ -8,7 +8,7 @@ from weather_condition_check import weather_condition_check
 from lmas_data_table import MySQLDatabase
 
 
-#Settings Class
+#Settings Class ( change to database for production)
 class Settings:
     def __init__(self):
         self.check_previous_AS = False  #check if previous AS has triggerd for DS
@@ -36,14 +36,14 @@ db=MySQLDatabase(host='localhost',user="Mepl",password="Mepl@123",database="mana
 #API Call /weatherapi
 mac_id = "1234"
 daigsat = '1'
-as3935 = '1'
+as3935 = '0'
 battery = '1234'
 
 diagsat = int(daigsat)
 as3935 = int(as3935)
 
 #DS settings, set if to check if AS has triggered before:
-settings.check_previous_AS = True
+settings.check_previous_AS = False
 settings.AS_trigger = 5
 settings.DS_AS_trigger_count = 5
 
@@ -57,14 +57,16 @@ settings.weather_station= False
 
 # Based on the settings logic for checking if hoot or not based on DS
 if diagsat == 1:
-    ds_return = ds_condition_check(settings, diagsat, as3935,mac_id,db)
+    # ds_return = ds_condition_check(settings, diagsat, as3935,mac_id,db)
+    # print(ds_return)
     # as_return = as_condition_check(settings, as3935)
-    # ws_return = weather_condition_check(settings)
+    ws_return = weather_condition_check(settings,db,mac_id)
 else:
     as_return = as_condition_check(settings, as3935)
     ws_return = weather_condition_check(settings)
 
-
+##Check the truth table to decide
 print('Depending on each resturn we will decide to hoot or not')
 
-print('ds return staement',ds_return)
+print(f"This hoot or not then we need to add a snippet of code to check if thsi should be updated to user via "
+      f"notification or not")
