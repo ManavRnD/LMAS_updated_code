@@ -15,20 +15,29 @@ def weather_condition_check(settings, db, mac_id):
         #Have to get the openweather api key, latitude and longitude first
         api_key = db.get_api_key(mac_id)
 
+        #in env file we have the openweatehr url
         api_url = os.getenv('weather_api')
 
+        #fetch weather data is used to do call for both current and forecast, and only the id will be returned
         current_weather_data = fetch_weather_data(api_url, api_key[0]['latitude'], api_key[0]['longitude'],
                                                   api_key[0]['api_key'])
-        print('curent weather', current_weather_data)
+        # print('curent weather', current_weather_data)
+
+        #cloud check to see if holds true for LMAS
         hoot_condition = cloud_check(current_weather_data)
-        print(hoot_condition)
-        if hoot_condition == 0:
+
+        if hoot_condition == 0:  # remember to change it to 1
             return hoot_condition
         else:
-            forecast_weather_call=fetch_weather_data(api_url, api_key[0]['latitude'], api_key[0]['longitude'],
-                                                  api_key[0]['api_key'],forecast_type='forecast')
-            print(f"forecast check break if condition satisfied",forecast_weather_call)
-            # print(f"check distance and return true or false")
+            #forecast call
+            forecast_weather_call = fetch_weather_data(api_url, api_key[0]['latitude'], api_key[0]['longitude'],
+                                                       api_key[0]['api_key'], forecast_type='forecast')
 
+            hoot_condition = cloud_check(forecast_weather_call)
 
+            if hoot_condition == 0:  # remember to change it to 1
+                return hoot_condition
+            else:
+                print('have to do direction call')
 
+            return 0

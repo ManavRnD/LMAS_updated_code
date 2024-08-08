@@ -61,6 +61,7 @@ if diagsat == 1:
     # print(ds_return)
     # as_return = as_condition_check(settings, as3935)
     ws_return = weather_condition_check(settings,db,mac_id)
+    print('Ws return',ws_return)
 else:
     as_return = as_condition_check(settings, as3935)
     ws_return = weather_condition_check(settings)
